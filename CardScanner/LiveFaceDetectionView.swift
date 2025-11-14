@@ -61,6 +61,8 @@ final class CameraController: NSObject, ObservableObject {
     private let videoOutput = AVCaptureVideoDataOutput()
     private var sequenceHandler = VNSequenceRequestHandler()
     fileprivate weak var previewView: CameraPreviewUIView?
+    
+    private var currentCameraPosition : AVCaptureDevice.Position?
 
     override init() {
         super.init()
@@ -88,6 +90,7 @@ final class CameraController: NSObject, ObservableObject {
     private func configureSession() {
         session.beginConfiguration()
         session.sessionPreset = .high
+        currentCameraPosition = .front
 
         // Camera device
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
@@ -136,6 +139,25 @@ final class CameraController: NSObject, ObservableObject {
             self.previewView?.showFaceRects(normalizedRects: boxes)
         }
     }
+    
+    //handling device orientation
+    func exifOrientationForCurrentDevice(position: AVCaptureDevice.Position) -> CGImagePropertyOrientation {
+        let deviceOrientation = UIDevice.current.orientation
+
+        switch deviceOrientation {
+        case .portrait:
+            return position == .front ? .leftMirrored : .right
+        case .portraitUpsideDown:
+            return position == .front ? .rightMirrored : .left
+        case .landscapeLeft: // phone tilted left
+            return position == .front ? .downMirrored : .up
+        case .landscapeRight: // phone tilted right
+            return position == .front ? .upMirrored : .down
+        default:
+            return .right // fallback
+        }
+    }
+
 }
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
@@ -147,7 +169,7 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
         // Decide orientation for Vision based on device orientation and camera position:
         // Use .leftMirrored for front camera portrait for better alignment if you mirror the preview
-        let exifOrientation: CGImagePropertyOrientation = .right // .right = portrait (AVFoundation default)
+        let exifOrientation = exifOrientationForCurrentDevice(position: currentCameraPosition ?? .front) // .right = portrait (AVFoundation default)
         // You can adapt orientation logic for device orientation if you want.
 
         let request = VNDetectFaceRectanglesRequest { [weak self] request, error in
