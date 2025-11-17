@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		18AA73212ECB0F8D003E0D2D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA73202ECB0F8D003E0D2D /* CameraViewController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		189D61972EC1AAB400F6CFCB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		189D61862EC1AAB300F6CFCB /* CardScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		189D61962EC1AAB400F6CFCB /* CardScannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardScannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		189D61A02EC1AAB400F6CFCB /* CardScannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardScannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18AA73202ECB0F8D003E0D2D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		189D617D2EC1AAB200F6CFCB = {
 			isa = PBXGroup;
 			children = (
+				18AA73202ECB0F8D003E0D2D /* CameraViewController.swift */,
 				189D61882EC1AAB300F6CFCB /* CardScanner */,
 				189D61992EC1AAB400F6CFCB /* CardScannerTests */,
 				189D61A32EC1AAB400F6CFCB /* CardScannerUITests */,
@@ -236,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18AA73212ECB0F8D003E0D2D /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
